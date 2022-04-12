@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const error = 2;
 const warn = 1;
 const ignore = 0;
@@ -33,5 +34,7 @@ module.exports = {
         extensions: [".js", ".jsx"],
       },
     ],
+    "react/require-default-props": ignore,
+    "jsx-a11y/no-autofocus": ignore,
   },
 };

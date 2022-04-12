@@ -1,5 +1,7 @@
 import React from "react";
+
 import AuthStyled from "./Auth.styled";
+
 import Login from "./components/Login/Login";
 import Header from "./components/Header/Header";
 

@@ -13,6 +13,17 @@ const LoginStyled = styled.div`
   background-color: ${COLORS.WHITE};
   border-radius: 0.5rem;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+
+  input {
+    width: 90%;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    border: 1px solid ${COLORS.GREY};
+    &&::placeholder {
+      color: ${COLORS.GREY};
+    }
+  }
 `;
 
 export default LoginStyled;

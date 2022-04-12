@@ -1,10 +1,11 @@
 import React from "react";
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 
+import GlobalStyles from "./styles/styles.global";
+
 import ROUTES from "./constants/routes";
 
 import Auth from "./pages/Auth/Auth";
-import GlobalStyles from "./styles/styles.global";
 
 function App() {
   return (
