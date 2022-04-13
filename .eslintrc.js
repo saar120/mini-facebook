@@ -37,5 +37,6 @@ module.exports = {
     "react/require-default-props": ignore,
     "jsx-a11y/no-autofocus": ignore,
     "no-console": ignore,
+    "import/prefer-default-export": ignore,
   },
 };
