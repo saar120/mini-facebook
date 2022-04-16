@@ -3,7 +3,6 @@ import COLORS from "../constants/colors";
 
 const GlobalStyles = createGlobalStyle`
 
-@import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&display=swap');
 
   * {
     box-sizing: border-box;

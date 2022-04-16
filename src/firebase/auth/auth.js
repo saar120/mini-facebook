@@ -24,7 +24,7 @@ const signIn = async (email, password) => {
 
 const signUserOut = async () => {
   try {
-    await signOut();
+    await signOut(auth);
     return { ok: true };
   } catch (err) {
     console.error(err.message);

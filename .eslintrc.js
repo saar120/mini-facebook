@@ -38,5 +38,7 @@ module.exports = {
     "jsx-a11y/no-autofocus": ignore,
     "no-console": ignore,
     "import/prefer-default-export": ignore,
+    "no-param-reassign": ignore,
+    "react/jsx-no-constructed-context-values": ignore, // check if indeed cause re renders
   },
 };
