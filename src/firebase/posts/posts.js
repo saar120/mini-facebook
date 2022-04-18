@@ -1,16 +1,92 @@
-import { collection, addDoc, Timestamp } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  doc,
+  orderBy,
+  serverTimestamp,
+  query,
+  onSnapshot,
+  deleteDoc,
+  setDoc,
+  updateDoc,
+  getDoc,
+  increment,
+} from "firebase/firestore";
 import { db } from "../firebase";
 
-const addPost = async ({ content, creator }) => {
-  e.preventDefault();
+const addPost = async (content, creator) => {
   try {
-    await addDoc(collection(db, "tasks"), {
+    const post = {
       content,
-      created: Timestamp.now(),
-    });
-    onClose();
+      creator,
+      createdAt: serverTimestamp(),
+      likes: 0,
+    };
+    const postRef = await addDoc(collection(db, "posts"), post);
+    return { ok: true, post: postRef.id };
   } catch (err) {
-    console.err(err);
-    return null;
+    console.error(err.message);
+    return { ok: false, error: "Something went wrong, please try again." };
   }
 };
+
+const likePost = async (postId, userId) => {
+  try {
+    // add like to likes subcollection for stats
+    const likesRef = doc(db, "posts", postId, "likes", userId);
+    const likes = await setDoc(likesRef, { userId, createdAt: serverTimestamp() });
+    // update likes count
+    const postRef = doc(db, "posts", postId);
+    await updateDoc(postRef, { likes: increment(1) });
+    return { ok: true, likes };
+  } catch (err) {
+    console.error(err.message);
+    return { ok: false, error: "Something went wrong, please try again." };
+  }
+};
+
+const unlikePost = async (postId, userId) => {
+  try {
+    // remove like from likes subcollection
+    const likeRef = doc(db, "posts", postId, "likes", userId);
+    const likes = await deleteDoc(likeRef);
+    // update likes count
+    const postRef = doc(db, "posts", postId);
+    await updateDoc(postRef, { likes: increment(-1) });
+    return { ok: true, likes };
+  } catch (err) {
+    console.error(err.message);
+    return { ok: false, error: "Something went wrong, please try again." };
+  }
+};
+
+const isPostLiked = async (postId, userId) => {
+  try {
+    const likesRef = doc(db, "posts", postId, "likes", userId);
+    const like = await getDoc(likesRef);
+    return { ok: true, isLiked: like.exists };
+  } catch (err) {
+    console.error(err.message);
+    return { ok: false, error: "Something went wrong, please try again." };
+  }
+};
+
+const postsSnapShot = (setState) => {
+  const q = query(collection(db, "posts"), orderBy("createdAt", "desc"));
+  return onSnapshot(q, async (snapshotQuery) => {
+    const posts = [];
+    snapshotQuery.forEach(async (post) => {
+      const { content, creator, createdAt, likes } = post.data();
+      posts.push({
+        id: post.id,
+        content,
+        creator,
+        createdAt,
+        likes,
+      });
+    });
+    setState(posts);
+  });
+};
+
+export { addPost, postsSnapShot, likePost, unlikePost, isPostLiked };

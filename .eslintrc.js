@@ -40,5 +40,6 @@ module.exports = {
     "import/prefer-default-export": ignore,
     "no-param-reassign": ignore,
     "react/jsx-no-constructed-context-values": ignore, // check if indeed cause re renders
+    "react/forbid-prop-types": ignore,
   },
 };
