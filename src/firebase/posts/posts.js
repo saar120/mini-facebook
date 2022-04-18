@@ -11,6 +11,7 @@ import {
   updateDoc,
   getDoc,
   increment,
+  where,
 } from "firebase/firestore";
 import { db } from "../firebase";
 
@@ -71,8 +72,11 @@ const isPostLiked = async (postId, userId) => {
   }
 };
 
-const postsSnapShot = (setState) => {
-  const q = query(collection(db, "posts"), orderBy("createdAt", "desc"));
+const postsSnapShot = (setState, creatorId = null) => {
+  const postsRef = collection(db, "posts");
+  const q = creatorId
+    ? query(postsRef, where("creator", "==", creatorId), orderBy("createdAt", "desc"))
+    : query(collection(db, "posts"), orderBy("createdAt", "desc"));
   return onSnapshot(q, async (snapshotQuery) => {
     const posts = [];
     snapshotQuery.forEach(async (post) => {

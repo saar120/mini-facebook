@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import COLORS from "../../../../constants/colors";
+import COLORS from "../../constants/colors";
 
 const PostStyled = styled.div`
   display: flex;
@@ -23,7 +23,12 @@ const PostStyled = styled.div`
     align-self: flex-start;
     margin-bottom: 0.5rem;
     font-size: 0.9rem;
+    cursor: pointer;
     color: ${COLORS.GREY_DARK};
+    transition: all 0.2s ease-in-out;
+    &:hover {
+      color: ${COLORS.PRIMARY};
+    }
   }
   p {
     font-size: 1.1rem;

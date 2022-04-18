@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+
+import { useLocation } from "react-router-dom";
+
+import Post from "../../components/Post/Post";
+import PageLayout from "../../components/Styled/PageLayout.styled";
 
 import { postsSnapShot } from "../../firebase/posts/posts";
 
-import PageLayout from "../../components/Styled/PageLayout.styled";
-import AddPost from "./components/AddPost/AddPost";
-import Post from "../../components/Post/Post";
-
-export default function Home() {
+export default function UserPage() {
   const [posts, setPosts] = useState([]);
+  const { pathname } = useLocation();
 
   useEffect(() => {
-    const unsubscribe = postsSnapShot(setPosts);
+    const creatorId = pathname.slice(1);
+    const unsubscribe = postsSnapShot(setPosts, creatorId);
     return () => {
       unsubscribe();
     };
@@ -18,7 +21,6 @@ export default function Home() {
 
   return (
     <PageLayout>
-      <AddPost />
       {posts.length > 0 &&
         posts.map(({ content, creator, id, likes }) => (
           <Post key={id} content={content} creator={creator} id={id} likes={likes} />

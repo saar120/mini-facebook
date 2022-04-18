@@ -41,5 +41,7 @@ module.exports = {
     "no-param-reassign": ignore,
     "react/jsx-no-constructed-context-values": ignore, // check if indeed cause re renders
     "react/forbid-prop-types": ignore,
+    "jsx-a11y/click-events-have-key-events": ignore,
+    "jsx-a11y/no-static-element-interactions": ignore,
   },
 };
