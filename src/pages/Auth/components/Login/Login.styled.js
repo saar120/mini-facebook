@@ -4,6 +4,7 @@ import COLORS from "../../../../constants/colors";
 const LoginStyled = styled.div`
   display: flex;
   margin: 1rem;
+  padding: 1rem;
   align-items: center;
   justify-content: center;
   gap: 1rem;

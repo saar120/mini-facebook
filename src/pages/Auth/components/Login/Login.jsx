@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { Button } from "@mui/material";
 import { register, signIn } from "../../../../firebase/auth/auth";
 
 import LoginStyled from "./Login.styled";
@@ -54,12 +55,12 @@ export default function Login() {
         value={password}
         handleChange={handleChange}
       />
-      <button type="submit" onClick={handleSubmit}>
+      <Button onClick={handleSubmit} fullWidth variant="contained">
         {isLogin ? "Log In" : "Sign Up"}
-      </button>
-      <button type="button" onClick={changeLoginOrRegister}>
+      </Button>
+      <Button onClick={changeLoginOrRegister} fullWidth variant="contained">
         {isLogin ? "No account ? sign up" : "Have an account ? log in"}
-      </button>
+      </Button>
       <h3>{error}</h3>
     </LoginStyled>
   );

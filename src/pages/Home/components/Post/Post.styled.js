@@ -28,6 +28,13 @@ const PostStyled = styled.div`
   p {
     font-size: 1.1rem;
   }
+  .likes {
+    display: flex;
+    align-items: center;
+    align-self: flex-end;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
 `;
 
 export default PostStyled;

@@ -2,10 +2,13 @@ import React from "react";
 
 import propTypes from "prop-types";
 
+import { IconButton } from "@mui/material";
+import { ThumbUpRounded } from "@mui/icons-material";
 import PostStyled from "./Post.styled";
 
 import { likePost } from "../../../../firebase/posts/posts";
 import { useAuth } from "../../../../context/user.context";
+import COLORS from "../../../../constants/colors";
 
 function Post({ content, creator, id, likes }) {
   const user = useAuth();
@@ -14,16 +17,16 @@ function Post({ content, creator, id, likes }) {
     likePost(id, user.uid);
   };
 
-  console.count(`Post${id}`);
-
   return (
     <PostStyled>
       <div className="creator">{creator}</div>
       <p>{content}</p>
-      <p>{likes}</p>
-      <button type="button" onClick={likePostHandler}>
-        Like
-      </button>
+      <div className="likes">
+        <p>{likes}</p>
+        <IconButton onClick={likePostHandler}>
+          <ThumbUpRounded sx={{ color: COLORS.PRIMARY }} />
+        </IconButton>
+      </div>
     </PostStyled>
   );
 }

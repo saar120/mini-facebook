@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-import { signUserOut } from "../../firebase/auth/auth";
 import { postsSnapShot } from "../../firebase/posts/posts";
 
 import HomeStyled from "./Home.styled";
@@ -19,9 +18,6 @@ export default function Home() {
 
   return (
     <HomeStyled>
-      <button type="button" onClick={() => signUserOut()}>
-        SignOut
-      </button>
       <AddPost />
       {posts.length > 0 &&
         posts.map(({ content, creator, id, likes }) => (
