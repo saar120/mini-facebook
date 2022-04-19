@@ -10,11 +10,10 @@ import Auth from "./pages/Auth/Auth";
 import Home from "./pages/Home/Home";
 import AuthRoute from "./routes/Auth.route";
 import UserPage from "./pages/UserPage/UserPage";
-import AdminPage from "./pages/Admin/AdminPage";
+import StatsPage from "./pages/Stats/StatsPage";
 import AdminRoute from "./routes/Admin.route";
 
 function App() {
-  console.count("app");
   return (
     <>
       <GlobalStyles />
@@ -25,7 +24,7 @@ function App() {
               <Route path={ROUTES.HOME} element={<Home />} />
               <Route path={ROUTES.USER} element={<UserPage />} />
               <Route element={<AdminRoute />}>
-                <Route path={ROUTES.STATS} element={<AdminPage />} />
+                <Route path={ROUTES.STATS} element={<StatsPage />} />
               </Route>
             </Route>
             <Route path={ROUTES.AUTH} element={<Auth />} />

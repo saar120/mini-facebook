@@ -1,6 +1,6 @@
 const ROUTES = {
   HOME: "/",
-  USER: "/:user",
+  USER: "/:creatorId",
   STATS: "/:post/stats",
   AUTH: "/auth",
 };

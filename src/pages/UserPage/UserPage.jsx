@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import Post from "../../components/Post/Post";
 import PageLayout from "../../components/Styled/PageLayout.styled";
@@ -9,10 +9,9 @@ import { postsSnapShot } from "../../firebase/posts/posts";
 
 export default function UserPage() {
   const [posts, setPosts] = useState([]);
-  const { pathname } = useLocation();
+  const { creatorId } = useParams();
 
   useEffect(() => {
-    const creatorId = pathname.slice(1);
     const unsubscribe = postsSnapShot(setPosts, creatorId);
     return () => {
       unsubscribe();

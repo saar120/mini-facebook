@@ -83,7 +83,11 @@ const getLikesPerDay = async (postId) => {
       const date = createdAt.toDate().toDateString();
       likesPerDay[date] = likesPerDay[date] ? likesPerDay[date] + 1 : 1;
     });
-    return { ok: true, likesPerDay };
+    const likesPerDayArr = Object.keys(likesPerDay).map((date) => ({
+      date,
+      likes: likesPerDay[date],
+    }));
+    return { ok: true, likesPerDayArr };
   } catch (err) {
     console.error(err.message);
     return { ok: false, error: "Something went wrong, please try again." };
