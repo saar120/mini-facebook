@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import propTypes from "prop-types";
 
@@ -7,15 +7,30 @@ import { ThumbUpRounded } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import PostStyled from "./Post.styled";
 
-import { likePost } from "../../firebase/posts/posts";
+import { likePost, isPostLiked, unlikePost } from "../../firebase/posts/posts";
 import { useAuth } from "../../context/user.context";
 import COLORS from "../../constants/colors";
 
 function Post({ content, creator, id, likes }) {
   const user = useAuth();
   const navigate = useNavigate();
+  const [isLiked, setIsLiked] = useState(false);
+
+  useEffect(() => {
+    const checkIfLiked = async () => {
+      const res = await isPostLiked(id, user.uid);
+      if (res.ok) {
+        setIsLiked(res.isLiked);
+      }
+    };
+    checkIfLiked();
+  }, [likes]);
 
   const likePostHandler = () => {
+    if (isLiked) {
+      unlikePost(id, user.uid);
+      return;
+    }
     likePost(id, user.uid);
   };
 
@@ -44,7 +59,7 @@ function Post({ content, creator, id, likes }) {
         >
           <p>{likes}</p>
           <IconButton onClick={likePostHandler}>
-            <ThumbUpRounded sx={{ color: COLORS.PRIMARY }} />
+            <ThumbUpRounded sx={{ color: isLiked ? COLORS.PRIMARY : null }} />
           </IconButton>
         </Container>
       </Container>

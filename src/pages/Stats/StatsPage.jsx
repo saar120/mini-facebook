@@ -10,7 +10,7 @@ const containerSx = {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  width: "clamp(300px, 90vw, 1000px)",
+  width: "clamp(300px, 90vw, 1800px)",
   height: "clamp(500px, 70vh, 1000px)",
   boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.1)",
   mt: "2rem",
@@ -24,7 +24,9 @@ export default function AdminPage() {
   useEffect(() => {
     const getLikesData = async () => {
       const likesData = await getLikesPerDay(post);
-      setLikesPerDay(likesData.likesPerDayArr);
+      if (likesData.ok) {
+        setLikesPerDay(likesData.likesPerDayArr);
+      }
     };
     getLikesData();
   }, []);

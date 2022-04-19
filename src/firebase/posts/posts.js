@@ -66,7 +66,7 @@ const isPostLiked = async (postId, userId) => {
   try {
     const likesRef = doc(db, "posts", postId, "likes", userId);
     const like = await getDoc(likesRef);
-    return { ok: true, isLiked: like.exists };
+    return { ok: true, isLiked: like.exists() };
   } catch (err) {
     console.error(err.message);
     return { ok: false, error: "Something went wrong, please try again." };
