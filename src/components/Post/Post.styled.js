@@ -6,6 +6,7 @@ const PostStyled = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 0.6rem;
   justify-content: center;
   width: clamp(300px, 40vw, 800px);
   padding: 1rem;
@@ -21,7 +22,6 @@ const PostStyled = styled.div`
     display: flex;
     align-items: center;
     align-self: flex-start;
-    margin-bottom: 0.5rem;
     font-size: 0.9rem;
     cursor: pointer;
     color: ${COLORS.GREY_DARK};
@@ -32,13 +32,6 @@ const PostStyled = styled.div`
   }
   p {
     font-size: 1.1rem;
-  }
-  .likes {
-    display: flex;
-    align-items: center;
-    align-self: flex-end;
-    gap: 0.5rem;
-    margin-bottom: 0.5rem;
   }
 `;
 

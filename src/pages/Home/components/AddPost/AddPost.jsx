@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+import { Button } from "@mui/material";
 import { useAuth } from "../../../../context/user.context";
 import { addPost } from "../../../../firebase/posts/posts";
 
@@ -31,9 +32,9 @@ function AddPost() {
         handleChange={handleChange}
         placeholder="What's on your mind..."
       />
-      <button type="button" onClick={handleSubmit}>
+      <Button variant="contained" onClick={handleSubmit}>
         Add Post
-      </button>
+      </Button>
     </AddPostStyled>
   );
 }

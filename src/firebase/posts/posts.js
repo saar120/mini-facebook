@@ -8,6 +8,7 @@ import {
   onSnapshot,
   deleteDoc,
   setDoc,
+  getDocs,
   updateDoc,
   getDoc,
   increment,
@@ -72,6 +73,23 @@ const isPostLiked = async (postId, userId) => {
   }
 };
 
+const getLikesPerDay = async (postId) => {
+  try {
+    const likesRef = collection(db, "posts", postId, "likes");
+    const likes = await getDocs(query(likesRef, orderBy("createdAt", "asc")));
+    const likesPerDay = {};
+    likes.forEach((like) => {
+      const { createdAt } = like.data();
+      const date = createdAt.toDate().toDateString();
+      likesPerDay[date] = likesPerDay[date] ? likesPerDay[date] + 1 : 1;
+    });
+    return { ok: true, likesPerDay };
+  } catch (err) {
+    console.error(err.message);
+    return { ok: false, error: "Something went wrong, please try again." };
+  }
+};
+
 const postsSnapShot = (setState, creatorId = null) => {
   const postsRef = collection(db, "posts");
   const q = creatorId
@@ -93,4 +111,4 @@ const postsSnapShot = (setState, creatorId = null) => {
   });
 };
 
-export { addPost, postsSnapShot, likePost, unlikePost, isPostLiked };
+export { addPost, postsSnapShot, likePost, unlikePost, isPostLiked, getLikesPerDay };

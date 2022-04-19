@@ -2,7 +2,7 @@ import React from "react";
 
 import propTypes from "prop-types";
 
-import { IconButton } from "@mui/material";
+import { Button, Container, IconButton } from "@mui/material";
 import { ThumbUpRounded } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import PostStyled from "./Post.styled";
@@ -23,18 +23,31 @@ function Post({ content, creator, id, likes }) {
     navigate(`/${creator}`);
   };
 
+  const adminClickHandler = () => {
+    navigate(`/${id}/stats`);
+  };
+
   return (
     <PostStyled>
       <div className="creator" onClick={userClickHandler}>
         {creator}
       </div>
       <p>{content}</p>
-      <div className="likes">
-        <p>{likes}</p>
-        <IconButton onClick={likePostHandler}>
-          <ThumbUpRounded sx={{ color: COLORS.PRIMARY }} />
-        </IconButton>
-      </div>
+      <Container sx={{ display: "flex", justifyContent: "space-between" }}>
+        {user.admin && (
+          <Button variant="contained" onClick={adminClickHandler}>
+            Stats
+          </Button>
+        )}
+        <Container
+          sx={{ display: "flex", alignItems: "center", justifyContent: "flex-end", gap: "0.5rem" }}
+        >
+          <p>{likes}</p>
+          <IconButton onClick={likePostHandler}>
+            <ThumbUpRounded sx={{ color: COLORS.PRIMARY }} />
+          </IconButton>
+        </Container>
+      </Container>
     </PostStyled>
   );
 }

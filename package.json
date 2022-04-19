@@ -14,7 +14,9 @@
     "react-dom": "^17.0.2",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.0",
-    "styled-components": "^5.3.5"
+    "styled-components": "^5.3.5",
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^3.18.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -22,7 +24,11 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint src/**/*.js src/**/*.jsx",
-    "lint:fix": "eslint --fix src/**/*.js src/**/*.jsx"
+    "lint:fix": "eslint --fix src/**/*.js src/**/*.jsx",
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
   },
   "eslintConfig": {
     "extends": [
@@ -50,6 +56,7 @@
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.28.0",
-    "prettier": "^2.6.2"
+    "prettier": "^2.6.2",
+    "firebase-functions-test": "^0.2.0"
   }
 }

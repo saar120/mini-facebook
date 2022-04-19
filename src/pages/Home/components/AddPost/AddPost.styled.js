@@ -20,19 +20,6 @@ const AddPostStyled = styled.div`
     margin-bottom: 1rem;
     background-color: ${COLORS.GREY};
   }
-  button {
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-    width: 70%;
-    border: 1px solid #ccc;
-    background-color: ${COLORS.PRIMARY};
-    color: ${COLORS.WHITE};
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    &:hover {
-      background-color: ${COLORS.PRIMARY_LIGHT};
-    }
-  }
 `;
 
 export default AddPostStyled;
